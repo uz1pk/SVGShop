@@ -1,4 +1,4 @@
-# SVG-Editor-Viewer
+# SVG App
 A Full Stack Web application which allows for SVG uploading, viewing, editing and saving.
 
 ## Running
