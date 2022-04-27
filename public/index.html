@@ -1,0 +1,306 @@
+<!--
+  Written By - Usman Zaheer (1148583)
+  Course - CIS 2750 W22 (Software Systems Development and Integration)
+  Professor - Dr. Denis Nikitenko
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href="#" />
+    <title>SVG Image Viewer</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Simple SVG Image Viewer and Editor" />
+    <meta name="author" content="Usman Zaheer" />
+    <!-- Load jquery, bootstrap -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- Custom CSS End -->
+  </head>
+
+  <body>
+    <!--
+      Jumbotron/Title Page
+    -->
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-2" id="main-title">SVG Image Viewer</h1>
+        <img id="svg-image" src="SVG_Logo.svg.png" alt="SVG logo" />
+        <p class="lead" id="leading-text">
+          User friendly interactive SVG viewer
+        </p>
+      </div>
+    </div>
+
+
+
+    <!--
+      File Log Panel
+    -->
+    <div class="main-body-page">
+      <hr class="new-rule" />
+      <div class="lead">File Log Panel</div>
+      <hr class="new-rule" />
+      <div class="scroll-bar">
+        <table id="file-log-table" class="table table-fixed">
+          <tr>
+            <th id="image-log">Image (click to download)</th>
+            <th>File name (click to download)</th>
+            <th>File size</th>
+            <th>Number of rectangles</th>
+            <th>Number of circles</th>
+            <th>Number of paths</th>
+            <th>Number of groups</th>
+          </tr>
+        </table>
+      </div>
+
+      <br />
+
+
+      <!--
+        SVG Upload Button
+      -->
+      <form
+        ref="svg-upload"
+        id="svg-upload"
+        enctype="multipart/form-data"
+        action="{URL}"
+        method="POST"
+      >
+        <div class="form-group">
+          <input type="file" name="uploadFile" id="uploadFile" />
+        </div>
+
+        <div class="form-group">
+          <input type="submit" value="Upload File" class="btn btn-info" />
+        </div>
+      </form>
+
+
+      <!--
+        Creating an SVG
+      -->
+      <hr class="new-rule" />
+      <div class="lead">Create an SVG</div>
+      <hr class="new-rule" />
+      <form ref="make-new-svg" id="make-new-svg">
+        <label for="fileName"> Name: </label>
+        <input type="text" id="new-filename" name="new-filename" />
+        <br />
+
+        <label for="new-description"> Description: </label>
+        <input type="text" id="new-description" name="new-description" />
+        <br />
+
+        <label for="new-title"> Title: </label>
+        <input type="text" id="new-title" name="new-title" />
+        <br />
+
+        <input type="submit" value="Create SVG" class="btn btn-info" />
+      </form>
+
+
+      <!--
+        SVG View Panel
+      -->
+      <hr class="new-rule" />
+      <div class="lead">SVG view panel</div>
+      <hr class="new-rule" />
+      <select id="svg-menu" name="svg-menu"></select>
+
+      <div id="vp-image"></div>
+      <div
+        class="container-fluid border-bottom border-left border-dark"
+        id="svg-view-panel"
+      ></div> 
+
+
+      <!--
+        Selected SVG Attribute Edit
+      -->
+      <hr class="new-rule" />
+      <p class="lead">Show / Edit Attribute</p>
+      <hr class="new-rule" />
+      <label> Shape: </label>
+      <input type="text" id="select-shape" name="select-shape" />
+      <br />
+      <label> Shape Num: </label>
+      <input type="text" id="select-num" name="select-num" /><br />
+      <input
+        id="attribute-display-submit"
+        name="attribute-display-submit"
+        type="submit"
+        value="Show Attributes"
+        class="btn btn-info"
+      /><br />
+      <br />
+
+      <label> Attribute Name: </label>
+      <input
+        type="text"
+        id="select-attribute-type"
+        name="select-attribute-type"
+      /><br />
+      <label> Attribute Value: </label>
+      <input
+        type="text"
+        id="select-attribute-val"
+        name="select-attribute-val"
+      /><br />
+      <input
+        id="attribute-edit-submit"
+        name="attribute-edit-submit"
+        type="submit"
+        value="Edit Attributes"
+        class="btn btn-info"
+      />
+      <br />
+      <br />
+
+
+      <!--
+        Div which will store entire attribute grid
+      -->
+      <div
+        class="container-fluid border-bottom border-left border-dark"
+        id="all-attribute-list"
+      ></div>
+
+
+
+      <!--
+        Selected SVG Title/Description Change
+      -->
+      <hr class="new-rule" />
+      <p class="lead">Set SVG title or description</p>
+      <hr class="new-rule" />
+      <form ref="title-change-form" id="title-change-form">
+        <input type="text" id="title-text-box" name="title-text-box" />
+        <input type="submit" value="Set Title" class="btn btn-info" />
+        <br />
+        <br />
+      </form>
+
+      <form ref="description-change-form" id="description-change-form">
+        <input
+          type="text"
+          id="description-text-box"
+          name="description-text-box"
+        />
+        <input type="submit" value="Set Description" class="btn btn-info" />
+      </form>
+
+
+
+      <!--
+        Selected SVG Add Shapes (Rect and Circ)
+      -->
+      <hr class="new-rule" />
+      <p class="lead">Add Shape</p>
+      <hr class="new-rule" />
+
+      <form ref="new-rect" id="new-rect">
+        <label for="x-input"> X: </label>
+        <input type="text" id="x-input" name="x-input" /><br />
+
+        <label for="y-input"> Y: </label>
+        <input type="text" id="y-input" name="y-input" /><br />
+
+        <label for="width-input"> Width: </label>
+        <input type="text" id="width-input" name="width-input" /><br />
+
+        <label for="height-input"> Height: </label>
+        <input type="text" id="height-input" name="height-input" /><br />
+
+        <label for="rect-unit-input"> Units </label>
+        <input type="text" id="rect-unit-input" name="rect-unit-input" /><br />
+
+        <input type="submit" value="Add New Rectangle" class="btn btn-info" />
+      </form>
+
+      <hr class="new-rule" />
+
+      <form ref="new-circle" id="new-circle">
+        <label for="cx-input"> CX: </label>
+        <input type="text" id="cx-input" name="cx-input" />
+        <br />
+
+        <label for="cy-input"> CY: </label>
+        <input type="text" id="cy-input" name="cy-input" /><br />
+
+        <label for="r-input"> R: </label>
+        <input type="text" id="r-input" name="r-input" /><br />
+
+        <label for="circle-unit-input"> Units </label>
+        <input
+          type="text"
+          id="circle-unit-input"
+          name="circle-unit-input"
+        /><br />
+
+        <input type="submit" value="Add New Circle" class="btn btn-info" />
+      </form>
+      <br />
+
+
+
+      <!--
+        Selected SVG Rectangle Scaling
+      -->
+      <hr class="new-rule" />
+      <p class="lead">Rectangle Scaling</p>
+      <hr class="new-rule" />
+      <form ref="rect-scale-form" id="rect-scale-form">
+        <label for="rect-scale-size"> Scale By: </label>
+        <input type="text" id="rect-scale-size" name="rect-scale-size" /><br />
+        <br />
+        <input type="submit" value="Set Scale" class="btn btn-info" />
+      </form>
+
+
+
+      <!--
+        Selected SVG Circle Scaling
+      -->
+      <hr class="new-rule" />
+      <p class="lead">Circle Scaling</p>
+      <hr class="new-rule" />
+
+      <form ref="circle-scale-form" id="circle-scale-form">
+        <label for="circle-scale-size"> Scale By: </label>
+        <input
+          type="text"
+          id="circle-scale-size"
+          name="circle-scale-size"
+        /><br />
+        <br />
+        <input type="submit" value="Set Scale" class="btn btn-info" />
+      </form>
+    </div>
+    <!-- Leave me at the bottom of body -->
+    <script src="/index.js"></script>
+  </body>
+</html>
