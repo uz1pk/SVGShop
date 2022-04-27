@@ -1,2 +1,6 @@
 # SVG-Editor-Viewer
-A Full Stack Web App utilizing a custom written SVG parsing library in C, Node/Express Backend and HTML/CSS/JS(jQuery) front end
+A Full Stack Web application which allows for SVG uploading, viewing, editing and saving.
+
+##Running
+- `npm install`
+- `npm run dev <PORT>`
