@@ -1,10 +1,3 @@
-/**
- * @file SVGHelper.c
- * @author Usman Zaheer (Student# 1148583)
- * @date February 2021
- * @brief File containing the helper functions used by SVGParser.c
- */
-
 #include "SVGParser.h"
 #include "SVGHelper.h"
 
@@ -593,7 +586,7 @@ Circle *parseCircle(xmlNode *circleNode)
 }
 
 /*
-ALL HELPER/LIST TRAVERSAL FUNCTIONS BELOW:
+List traversals and helpers below:
 */
 
 float extractNumber(char *string)
@@ -785,7 +778,7 @@ void dummyDeleteFunc(void *dummy)
 }
 
 /*
-ALL ASSIGNMENT 2 HELPER FUNCTIONS BELOW:
+Svg conversion helpers:
 */
 
 xmlDoc *SVGtoXmlDoc(const SVG *img)
