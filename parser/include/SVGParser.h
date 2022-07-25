@@ -103,12 +103,7 @@ typedef struct
 // structs will only have one
 typedef struct
 {
-
-    // For tghe fixed-length fields below, verify that the relevant data fits before copying
-    // it into the field.
-    // If the data exceeds thre field length, truncate the data to fit the max field length.
-
-    // Namespace associated with our SVG struct.  May be not be empty.  While a real SVG struct might have
+    // Namespace associated with our SVG struct.  While a real SVG struct might have
     // multiple namespaces associated with it, we will assume there is only one
     char namespace[256];
 
@@ -132,8 +127,6 @@ typedef struct
     // Do not put the namespace here, since it already has its own field
     List *otherAttributes;
 } SVG;
-
-// A1
 
 /* Public API - main */
 
@@ -165,10 +158,7 @@ char *SVGToString(const SVG *img);
  **/
 void deleteSVG(SVG *img);
 
-/* For the four "get..." functions below, make sure you return a list of opinters to the existing structs
- - do not allocate new structs.  They all share the same format, and only differ in the contents of the lists
- they return.
-
+/*
  *@pre SVG struct exists, is not null, and has not been freed
  *@post SVG struct has not been modified in any way
  *@return a newly allocated List of components.  While the List struct itself is new, the components in it are just pointers
@@ -188,13 +178,7 @@ List *getGroups(const SVG *img);
 // Function that returns a list of all paths in the struct.
 List *getPaths(const SVG *img);
 
-/* For the four "num..." functions below, you need to search the SVG struct for components that match the search
-  criterion.  You may wish to write some sort of a generic searcher fucntion that accepts a struct, a predicate function,
-  and a dummy search record as arguments.  We will discuss such search functions in class
-
- NOTE: For consistency, use the ceil() function to round the floats up to the nearest integer once you have computed
- the number you need.  See A1 Module 2 for details.
-
+/* 
  *@pre SVG struct exists, is not null, and has not been freed.  The search criterion is valid
  *@post SVG struct has not been modified in any way
  *@return an int indicating how many objects matching the criterion are contained in the struct
@@ -220,7 +204,6 @@ int numGroupsWithLen(const SVG *img, int len);
 */
 int numAttr(const SVG *img);
 
-/* ******************************* A2 stuff *************************** */
 /** Function to validating an existing an SVG struct against a SVG schema file
  *@pre
     SVG struct exists and is not NULL
@@ -375,8 +358,6 @@ char *groupListToJSON(const List *list);
  **/
 char *SVGtoJSON(const SVG *img);
 
-/* ******************************* Bonus A2 functions - optional for A2 *************************** */
-
 /** Function to converting a JSON string into an SVG struct
  *@pre JSON string is not NULL
  *@post String has not been modified in any way
@@ -401,7 +382,7 @@ Rectangle *JSONtoRect(const char *svgString);
  **/
 Circle *JSONtoCircle(const char *svgString);
 
-/* ******************************* List helper functions  - MUST be implemented *************************** */
+/* ******************************* List helper functions *************************** */
 
 void deleteAttribute(void *data);
 char *attributeToString(void *data);
