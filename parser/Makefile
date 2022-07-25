@@ -34,18 +34,5 @@ $(BIN)LinkedListAPI.o: $(SRC)LinkedListAPI.c $(INC)LinkedListAPI.h
 
 clean:
 	rm -rf $(BIN)StructListDemo $(BIN)xmlExample $(BIN)*.o
-
-#This is the target for the in-class XML example
-xmlExample: $(SRC)libXmlExample.c
-	$(CC) $(CFLAGS) -I$(XML_PATH) $(SRC)libXmlExample.c -lxml2 -o $(BIN)xmlExample
-
-#These are sample targets for the list demo code included in the class examples.  They will not be used
-#for A1, but they can help you figure out who to set up a target for your own test main
-
-StructListDemo: $(BIN)StructListDemo.o $(BIN)liblist.so
-	$(CC) $(CFLAGS) $(LDFLAGS) -L$(BIN) -o $(BIN)StructListDemo $(BIN)StructListDemo.o  -llist
 	
-$(BIN)StructListDemo.o: $(SRC)StructListDemo.c
-	$(CC) $(CFLAGS) -I$(INC) -c $(SRC)StructListDemo.c -o $(BIN)StructListDemo.o
-
 ###################################################################################################
