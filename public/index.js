@@ -1,9 +1,3 @@
-/**
- * @Written_By - Usman Zaheer (1148583)
- * @Course - CIS 2750 W22 (Software Systems Development and Integration)
- * @Professor - Dr. Denis Nikitenko
- */
-
 jQuery(document).ready(function () {
 
     //Global variables to store data needed between different server requests
