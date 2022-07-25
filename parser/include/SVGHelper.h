@@ -1,10 +1,3 @@
-/**
- * @file SVGHelper.h
- * @author Usman Zaheer (Student# 1148583)
- * @date February 2021
- * @brief File containing the function definitions of functions in SVGParser.c
- */
-
 #include <math.h>
 #include <ctype.h>
 #include <strings.h>
