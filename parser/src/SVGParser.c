@@ -1,19 +1,8 @@
-/**
- * @file SVGParser.c
- * @author Usman Zaheer (Student# 1148583)
- * @date February 2021
- * @brief File containing the main functions for the SVG parser
- */
-
 #include "SVGParser.h"
 #include "SVGHelper.h"
 
 /*
-All Assignment 1 Functions Below: Delete, toString, and Compare below
-*/
-
-/*
-Main SVG Parsing Functions Below: Create instead of compare
+Main SVG Parsing Functions Below
 */
 
 SVG *createSVG(const char *filename)
@@ -946,7 +935,7 @@ int numAttr(const SVG *img)
 }
 
 /*
-ALL ASSIGNMENT 2 FUNCTIONS BELOW:
+All creation from file and validation functions below:
 */
 
 SVG *createValidSVG(const char *fileName, const char *schemaFile)
@@ -1248,7 +1237,7 @@ void addComponent(SVG *img, elementType type, void *newElement)
 }
 
 /*
-ALL TO JSON FUNCTIONS BELOW:
+All shape or structure to JSON below:
 */
 
 char *attrToJSON(const Attribute *a)
@@ -1786,7 +1775,7 @@ char *SVGtoJSON(const SVG *img)
 }
 
 /*
-ALL JSON TO STRUCT FUNCTIONS BELOW:
+All reverse conversions below:
 */
 
 SVG *JSONtoSVG(const char *svgString)
@@ -1989,7 +1978,7 @@ Circle *JSONtoCircle(const char *svgString)
 }
 
 /*
-All A3 helper functions below:
+JSON helpers below:
 */
 
 char *getDescription(char *fileName, char *schemaFile)
