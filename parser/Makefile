@@ -10,12 +10,7 @@ ROOT = ../
 PARSER_SRC_FILES = $(wildcard src/SVG*.c)
 PARSER_OBJ_FILES = $(patsubst src/SVG%.c,bin/SVG%.o,$(PARSER_SRC_FILES))
 
-ifeq ($(UNAME), Linux)
-	XML_PATH = /usr/include/libxml2
-endif
-ifeq ($(UNAME), Darwin)
-	XML_PATH = /System/Volumes/Data/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/libxml2
-endif
+XML_PATH = /usr/include/libxml2
 
 parser: $(ROOT)libsvgparser.so
 
